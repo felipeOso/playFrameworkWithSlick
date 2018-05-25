@@ -37,6 +37,12 @@ class UserDAOImpl @Inject()
     }
   }
 
+
+
+  def sumar(a:Int)(implicit b:Int):Int =a+b
+  sumar(1)
+
+  implicit val b: Int = 5
   override def delete(id: Long): Future[Int] = {
     db.run(users.filter(_.id === id).delete)
   }
@@ -47,5 +53,9 @@ class UserDAOImpl @Inject()
 
   override def listAll: Future[Seq[User]] = {
     db.run(users.result)
+  }
+
+  override def findByName(id: String): Future[Option[User]] = {
+    db.run(users.filter( _.firstName like  s"%$id%").result.headOption)
   }
 }
