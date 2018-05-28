@@ -38,11 +38,11 @@ class UserDAOImpl @Inject()
   }
 
 
-
+  implicit val b: Int = 5
   def sumar(a:Int)(implicit b:Int):Int =a+b
   sumar(1)
 
-  implicit val b: Int = 5
+
   override def delete(id: Long): Future[Int] = {
     db.run(users.filter(_.id === id).delete)
   }
